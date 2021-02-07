@@ -8,5 +8,7 @@ public class MainClass {
                 .flatMap(e -> e.getValue().stream())
                 .map(e -> e + "! ")
                 .forEach(System.out::print);
+
+        System.out.println("Test print");
     }
 }
