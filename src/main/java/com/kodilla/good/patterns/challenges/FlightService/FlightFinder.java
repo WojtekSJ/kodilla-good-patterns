@@ -20,14 +20,31 @@ public class FlightFinder {
     }
 
     public void findAllInterimFlights(String startCity, String destinationCity, FlightList flightList) {
-        Set<Connection> secondFligt;
+
         Set<Connection> firstFligt;
+        Set<Connection> secondFligt;
+
         System.out.println("\nLoty posrednie z: " +startCity + " do " +destinationCity);
-            secondFligt = flightList.getConnectionList().stream()
+
+        firstFligt = flightList.getConnectionList().stream()
+                .filter(e -> e.getStartCity().equals(startCity))
+                .collect(Collectors.toSet());
+
+
+        secondFligt = flightList.getConnectionList().stream()
                 .filter(e -> e.getDestinationCity().equals(destinationCity))
                     .collect(Collectors.toSet());
 
-            for(Connection temp: secondFligt) {
+        for (Connection firstFlightTemp: firstFligt) {
+            for (Connection secondFlightTemp: secondFligt) {
+                if (firstFlightTemp.getDestinationCity().equals(secondFlightTemp.getStartCity()))
+                System.out.println(firstFlightTemp.getStartCity() +
+                        " -> " + firstFlightTemp.getDestinationCity() + " oraz " + secondFlightTemp.getStartCity() + " -> "
+                        + secondFlightTemp.getDestinationCity());
+            }
+        }
+
+            /*for(Connection temp: secondFligt) {
                 firstFligt = flightList.getConnectionList().stream()
                         .filter(e -> e.getStartCity().equals(startCity))
                         .filter(e ->e.getDestinationCity().equals(temp.getStartCity()))
@@ -40,6 +57,6 @@ public class FlightFinder {
                                 + temp.getDestinationCity());
                     }
                 }
-            }
+            }*/
     }
 }
